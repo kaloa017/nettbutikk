@@ -1,0 +1,31 @@
+header{
+    display: flex;
+    justify-content: start;
+    margin: 2vh;
+    gap: 3vh;
+    align-items: center;
+    font-size: 20px;
+}
+
+header input {
+    width: 60vh;
+    padding: 1vh 1vh;
+    border-radius: 8px;
+}
+
+* {
+    font-family: "Bahnschrift", system-ui, "Ubuntu";
+    color: #000000;
+}
+
+header a{
+    text-decoration: none;
+}
+
+.content{
+    margin:2vh;
+
+}
+.content p{
+    font-size: 20px;
+}
