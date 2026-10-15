@@ -8,8 +8,13 @@ Jeg startet med å lage en sketch med hvordan jeg ønsker å gjennomføre oppgav
 Ting å legge til:
 
 * Forbedre UI og UX
-* Legge til kort og en vertikal scrollemeny, med forskjellige kategorier
-* Fungerende handlekurv
+* Legge til kort og en vertikal scrollemeny, med forskjellige kategorier [GJORT]
+* Fungerende handlekurv [HOLDER PÅ]
 * Bli ferdig
 
 Loggen oppdateres etter hver time med IT-1.
+
+dag 2 
+
+forbedret UI og la til anmeldelser. For tiden kun estetisk.
+
