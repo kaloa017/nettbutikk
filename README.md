@@ -18,3 +18,7 @@ dag 2
 
 forbedret UI og la til anmeldelser. For tiden kun estetisk.
 
+dag 3
+
+
+
