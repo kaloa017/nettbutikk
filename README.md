@@ -20,5 +20,5 @@ forbedret UI og la til anmeldelser. For tiden kun estetisk.
 
 dag 3
 
-
+la til en backstory, med hjelp av huseby salg
 
