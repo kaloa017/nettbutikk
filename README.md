@@ -25,3 +25,6 @@ la til en backstory, med hjelp av huseby salg
 dag 4
 
 lagt til gitignore, endra språk til html sidene til norsk, litt fixes her og der
+
+dag 5
+
