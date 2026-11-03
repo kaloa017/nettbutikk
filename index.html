@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forside til nettbutikk</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <header>
@@ -19,17 +20,18 @@
 
     </div>
 
-    <div class="meny">
+    <div class="meny"> <!-- foreløpig kun denne fungerer -->
         <div class="Produkt1">
-            PlayStation 5 - Slim (Disc)
+            ${produkt.navn}
             <img src="img/ps5.jpg" alt="" width="240px" height="300px">
             <p>Pris: 5600kr</p>
             <h6>mva. inkl.</h6>
             <p class="vurdering">
                 <span class="stjerner">★★★★☆</span> 4.4 <span class="antall-vurd">(141)</span>
             </p>
-            <button id="cart">Legg til i handlekurven</button>
+            <button class="kjopKnapp" data-id="${produkt.id}">Legg til i handlekurven</button>
         </div>
+
         <div class="Produkt1">
             PlayStation 5 - Slim (Digital)
             <img src="img/ps5_no_disc.jpeg" alt="" width="240px" height="300px">
@@ -144,5 +146,7 @@
             <button id="cart_2">Legg til i handlekurven</button>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

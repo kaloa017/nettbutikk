@@ -28,3 +28,4 @@ lagt til gitignore, endra språk til html sidene til norsk, litt fixes her og de
 
 dag 5
 
+Da er mye mer handlekurv funksjonalitet lagt til. Det er nå mye nærmere ett ferdig produkt.
