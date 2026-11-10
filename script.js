@@ -1,62 +1,128 @@
-// handlekurv
+const produkter = JSON.parse(localStorage.getItem("produkter")) || [
+    {
+        id: 1,
+        navn: "PlayStation 5 - Slim (Disc)",
+        pris: 5600,
+        bilde: "img/ps5.jpg",
+        antall: 0
+    },
+    {
+        id: 2,
+        navn: "PlayStation 5 - Slim (Digital)",
+        pris: 4800,
+        bilde: "img/ps5_no_disc.jpeg",
+        antall: 0
+    },
+    {
+        id: 3,
+        navn: "Nintendo Switch 2",
+        pris: 6000,
+        bilde: "img/switch_2.jpeg",
+        antall: 0
+    },
+    {
+        id: 4,
+        navn: "Nintendo Switch Oled",
+        pris: 3790,
+        bilde: "img/switch_oled.jpeg",
+        antall: 0
+    },
+    {
+        id: 5,
+        navn: "Nintendo Switch LCD",
+        pris: 2090,
+        bilde: "img/switch_lcd.jpeg",
+        antall: 0
+    },
+    {
+        id: 6,
+        navn: "Xbox Series X",
+        pris: 3999,
+        bilde: "",
+        antall: 0
+    }
+];
 
-    const container  = document.getElementById("produktContainer");
-    const kurvPopup  = document.getElementById("kurvPopup");
-    const kurvKnapp  = document.getElementById("kurvKnapp");
-    const lukkKurv   = document.getElementById("lukkKurv");
-    const tomKnapp   = document.getElementById("tomKurv");
+function endreAntall(id, endring) {
+    let produkt = produkter.find(p => p.id === id);
 
-    document.querySelectorAll(".kjopKnapp").forEach(knapp => {
-        knapp.addEventListener("click", () => {
-        let id = Number(knapp.dataset.id);
-        let valgtProdukt = produkter.find(produkt => produkt.id === id);
+    produkt.antall = produkt.antall + endring;
 
-        let ibkurv = handlekurv.find(vare => vare.id === id);
-        if (ibkurv) {
-            ibkurv.antall++;
-        } else {
-            handlekurv.push({ ...valgtProdukt, antall: 1 });
-        }
-    
-        oppdaterAntall();
-        });
-    });
-
-    function oppdaterAntall() {
-        let antall = 0;
-        for (let vare of handlekurv) {
-            antall = antall + vare.antall;
-        }
-        document.getElementById("antallKurv").textContent = antall;
+    if (produkt.antall < 0) {
+        produkt.antall = 0;
     }
 
-    
+    oppdaterAlt();
+}
 
-    let handlekurv = []
+function fjernVare(id) {
+    let produkt = produkter.find(p => p.id === id);
 
-    const produkter = [
+    produkt.antall = 0;
 
-        {
-        id: 1, 
-        navn: "PlayStation 5 - Slim (Disc)", 
-        pris: 5600, 
-        bilde: "img/ps5.jpg"
-        },
+    oppdaterAlt();
+}
 
-        // kun midlertidig kommentar for test
+function oppdaterAlt() {
+    localStorage.setItem("produkter", JSON.stringify(produkter));
+    oppdaterAntall();
 
-        // {
-        // id: 2,
-        // navn: "Mus",
-        // pris: 299,
-        // bilde: "Bilder/mus.jpg"
-        // },
+    if (document.getElementById("kurvListe")) {
+        visHandlekurv();
+    }
+}
 
-        // {
-        // id: 3,
-        // navn: "Skjerm",
-        // pris: 2499,
-        // bilde: "Bilder/skjerm.jpg"
-        // }
+function oppdaterAntall() {
+    const antallKurv = document.getElementById("antallKurv");
 
-    ];
+    if (antallKurv) {
+        let antall = 0;
+
+        for (let produkt of produkter) {
+            antall = antall + produkt.antall;
+        }
+
+        antallKurv.textContent = antall;
+    }
+}
+
+function visHandlekurv() {
+    const liste = document.getElementById("kurvListe");
+    liste.innerHTML = "";
+
+    let total = 0;
+
+    for (let produkt of produkter) {
+        if (produkt.antall > 0) {
+            liste.innerHTML += `
+                <div>
+                    <img src="${produkt.bilde}" alt="${produkt.navn}" width="100">
+                    <h3>${produkt.navn}</h3>
+                    <p>${produkt.pris} kr per stk</p>
+                    <button onclick="endreAntall(${produkt.id}, -1)">-</button>
+                    <span>Antall: ${produkt.antall}</span>
+                    <button onclick="endreAntall(${produkt.id}, 1)">+</button>
+                    <p>Sum: ${produkt.pris * produkt.antall} kr</p>
+                    <button onclick="fjernVare(${produkt.id})">Fjern</button>
+                </div>
+            `;
+            total = total + produkt.pris * produkt.antall;
+        }
+    }
+
+    if (total === 0) {
+        liste.innerHTML = "<p>Handlekurven er tom.</p>";
+        document.getElementById("totalPris").textContent = "";
+    } else {
+        document.getElementById("totalPris").textContent =
+            "Totalt: " + total + " kr";
+    }
+}
+
+document.querySelectorAll(".kjopKnapp").forEach(knapp => {
+    knapp.addEventListener("click", () => {
+        endreAntall(Number(knapp.dataset.id), 1);
+    });
+});
+
+oppdaterAlt();
