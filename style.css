@@ -63,3 +63,11 @@ header a{
     background-color: #c7c7c7;
     transform: scale(1.05);
 }
+
+a:hover{
+    transform: scale(1.15);
+}
+
+a{
+    transition: transform 0.3s ease-in-out;
+}

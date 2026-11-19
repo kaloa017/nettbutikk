@@ -119,10 +119,26 @@ function visHandlekurv() {
     }
 }
 
-document.querySelectorAll(".kjopKnapp").forEach(knapp => {
-    knapp.addEventListener("click", () => {
-        endreAntall(Number(knapp.dataset.id), 1);
+// søke funksjon
+
+const sokefelt = document.getElementById("sokefelt");
+const ingenTreff = document.getElementById("ingenTreff");
+const alleKort = document.querySelectorAll(".Produkt1");
+
+if (sokefelt) {
+    sokefelt.addEventListener("input", () => {
+        let sok = sokefelt.value.toLowerCase().trim();
+
+        let treff = Array.from(alleKort).filter(kort =>
+            kort.childNodes[0].textContent.toLowerCase().includes(sok)
+        );
+
+        alleKort.forEach(kort => {
+            kort.style.display = treff.includes(kort) ? "" : "none";
+        });
+
+        ingenTreff.style.display = treff.length === 0 ? "block" : "none";
     });
-});
+}
 
 oppdaterAlt();
